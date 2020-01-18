@@ -20,12 +20,10 @@
     <nav class="navbar fixed-top navbar-expand-md navbar-dark " style="background-color: #1C2331;color: white;">
         <div class="d-flex w-50 order-0">
             <a class="navbar-brand" href="https://drive.google.com/file/d/1KlDmVZEYAa7U0KMyiriPOzSt2dkRX-nG/view">
-                <img src="{{ url_for('static', filename='Brand/Blockchain.png') }}" width="90" height="90"
+                <img src="{{ url_for('static', filename='Brand/Blockchain.png') }}" width="60" height="60"
                     style="vertical-align: middle;border-radius: 50%; margin-right: 15px;">
-                <label style="font-size: larger;font-size: 40px;">523355 Introduction to Blockchain Technology</label>
-
+                <label style="font-size: 30px;">523355 Introduction to Blockchain Technology</label>
             </a>
-
         </div>
         <ul class="navbar-nav mr-auto">
         </ul>
@@ -49,63 +47,116 @@
 
     </nav>
 
-    <div style="margin-left: 40px;margin-right: 40px; margin-top: 100px; margin-bottom: 100px;">
+    <div style="margin-left: 40px;margin-right: 40px; margin-top: 80px; margin-bottom: 100px;">
         <br><br>
         <h1 class="display-4">Hello, BlockChain !</h1>
         <p class="lead"> 523355 Introduction to Blockchain Technology Assignment 1 <br>
-            ให้ออกแบบและสร้าง Prototype ที่เหมาะสมในการน า Blockchain มาใช้แทนการเก็บข้อมูลแบบ Centralized
+            ให้ออกแบบและสร้าง Prototype ที่เหมาะสมในการนำ Blockchain มาใช้แทนการเก็บข้อมูลแบบ Centralized
             Database .</p>
         <br>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFrom">
-            <i class="fas fa-link"></i>Add Bloack
+            <i class="fas fa-link"></i>Add Block
         </button>
         <br>
         <br>
 
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">index</th>
-                    <th scope="col">hash</th>
-                    <th scope="col">timestamp</th>
-                    <th scope="col">data</th>
-                    <th scope="col">previous_hash</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for block in blocks %}
-                <tr>
-                    <th scope="row">{{ block.index }}</th>
-                    <td>{{ block.hash }}</td>
-                    <td>{{ block.timestamp }}</td>
-                    {% if block.data=='Genesis block' %}
-                    <td>{{ block.data }}</td>
-                    {% else %}
-                    <td>
+        <div style="padding-right: 40px; width: max-content;">
+            <table class="table table-bordered table-hover">
+                <thead class="" style="background-color: #58D68D;">
+                    <tr>
+                        <th scope="col">index</th>
+                        <th scope="col">hash</th>
+                        <th scope="col">timestamp</th>
+                        <th scope="col">TitleDeed</th>
+                        <th scope="col">Owner</th>
+                        <th scope="col">verify</th>
+                        <th scope="col">previous_hash</th>
+
+                    </tr>
+                </thead>
+                <tbody style="background-color: #ABEBC6;">
+                    {% for block in blocks %}
+                    <tr>
+                        <th scope="row">{{ block.index }}</th>
+                        <td>{{ block.hash }}</td>
+                        <td>{{ block.timestamp }}</td>
+                        {% if block.data=='Genesis block' %}
+                        <td colspan="3" class="text-center">{{ block.data }}</td>
+                        {% else %}
+
                         {% for dataId in block.data %}
-                        <span>
-                            {{ dataId.from_address }} &nbsp; to
-                        </span>
-                        <span>
-                            {{ dataId.to_address }} &nbsp;
-                        </span>
-                        <span>
-                            {{ dataId.amount }} &nbsp; bath.
-                        </span>
-                        <br>
+                        <td>
+                            <span>
+                                เลขที่:&nbsp; {{ dataId.TitleDeed.number }} &nbsp;
+                            </span>
+                            <span>
+                                เล่ม:&nbsp; {{ dataId.TitleDeed.book }} &nbsp;
+                            </span>
+                            <span>
+                                ที่อยู่:&nbsp; {{ dataId.TitleDeed.address }} &nbsp;
+                            </span>
+                            <span>
+                                เนื้อที่ประมาณ:&nbsp; {{ dataId.TitleDeed.area }} 
+                            </span>
+                            
+                        </td>
+                        <td>
+                            <span>
+                                ชื่อ:&nbsp;{{ dataId.Owner.name }} &nbsp;
+                            </span>
+                            <span>
+                                ที่อยู่:&nbsp; {{ dataId.Owner.address }} &nbsp;
+                            </span>
+                           
+                        </td>
+                        <td>
+                            <span>
+                                ชื่อ:&nbsp;{{ dataId.verify }} 
+                            </span>
+                            
+                        </td>
                         {% endfor %}
-                    </td>
-                    {% endif %}
 
-                    <td>{{ block.previous_hash }}</td>
-                </tr>
-                {% endfor %}
+                        {% endif %}
 
-            </tbody>
-        </table>
+                        <td>{{ block.previous_hash }}</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
+    <!-- Modal row table Detail-->
+    <div class="modal fade" id="rowTable" tabindex="-1" role="dialog" aria-labelledby="exampleModalrowTable"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form class="px-4 py-3" action="http://localhost:8080/newBlock/" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;">
+                            <i class="fas fa-dice-d6"></i> &nbsp;Add BlockChain
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        ......
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add Block</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal Add BlockChain-->
     <div class="modal fade" id="addFrom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -123,24 +174,65 @@
                     </div>
                     <div class="modal-body">
 
+                        <h5 class="modal-title"  style="font-size: 15px;">
+                            <i class="fas fa-scroll"></i> &nbsp;โฉนดที่โดน
+                        </h5>
+                        <div style="padding: 20px;">
+                            
+                            <div class="form-group">
+                                <label for="exampleDropdownFormEmail1">เลขที่</label>
+                                <input type="text" class="form-control"  name="number"
+                                    placeholder="กรอกเลขที่">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">เล่ม</label>
+                                <input type="text" class="form-control"  name="book"
+                                    placeholder="กรอกเล่ม">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">ที่อยู่</label>
+                                <input type="text" class="form-control"  name="DeedAddress" placeholder="กรอกที่อยู่">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">พื้นที่โดยประมาณ</label>
+                                <input type="text" class="form-control"  name="area" placeholder="กรอกพื้นที่โดยประมาณ">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="exampleDropdownFormEmail1">from_address</label>
-                            <input type="text" class="form-control" id="from_address" name="from_address"
-                                placeholder="from_address">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleDropdownFormPassword1">to_address</label>
-                            <input type="text" class="form-control" id="to_address" name="to_address"
-                                placeholder="to_address">
+
+                        <h5 class="modal-title"  style="font-size: 15px;">
+                            <i class="fas fa-user-alt"></i> &nbsp;ให้เเก่
+                        </h5>
+                        <div style="padding: 20px;">
+                            
+                            <div class="form-group">
+                                <label for="exampleDropdownFormEmail1">ชื่อ</label>
+                                <input type="text" class="form-control" name="name"
+                                    placeholder="กรอกชื่อ">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">ที่อยู่</label>
+                                <input type="text" class="form-control"  name="OwnerAddress"
+                                    placeholder="กรอกที่อยู่">
+                            </div>
+                            
+
                         </div>
-                        <div class="form-group">
-                            <label for="exampleDropdownFormPassword1">amount</label>
-                            <input type="text" class="form-control" id="amount" name="amount" placeholder="amount">
+
+                        <h5 class="modal-title"  style="font-size: 15px;">
+                            <i class="fas fa-user-shield"></i> &nbsp;ผู้ตรวจสอบ
+                        </h5>
+                        <div style="padding: 20px;">
+                            
+                            <div class="form-group">
+                                <label for="exampleDropdownFormEmail1">ชื่อ</label>
+                                <input type="text" class="form-control"  name="verify"
+                                    placeholder="กรอกชื่อ">
+                            </div>
+                            
+
                         </div>
-
-
-
+                        
 
                     </div>
                     <div class="modal-footer">
