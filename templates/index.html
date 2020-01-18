@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- font-awesome CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome5/all.css') }}">
+    <script defer src="{{ url_for('static', filename='fontawesome5/all.js') }}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='Bootstrap4/bootstrap.min.css') }}"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Assignment 1 </title>
+</head>
+
+<body style="font-family:cursive">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark " style="background-color: #1C2331;color: white;">
+        <div class="d-flex w-50 order-0">
+            <a class="navbar-brand" href="https://drive.google.com/file/d/1KlDmVZEYAa7U0KMyiriPOzSt2dkRX-nG/view">
+                <img src="{{ url_for('static', filename='Brand/Blockchain.png') }}" width="90" height="90"
+                    style="vertical-align: middle;border-radius: 50%; margin-right: 15px;">
+                <label style="font-size: larger;font-size: 40px;">523355 Introduction to Blockchain Technology</label>
+
+            </a>
+
+        </div>
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="http://127.0.0.1:8080/" style="margin: 20px; font-size: 20px;">Home</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="http://127.0.0.1:8080/blocks"
+                    style="margin: 20px; font-size: 20px;">Blocks</a>
+            </li>
+
+
+        </ul>
+        <button data-toggle="modal" data-target="#groupMembers"
+            class="btn btn-outline-success my-2 my-sm-0 order-md-last text-right" type="button"
+            style="margin: 20px; font-size: 20px;">
+            Group Detail
+        </button>
+
+
+    </nav>
+
+    <div style="margin-left: 40px;margin-right: 40px; margin-top: 100px;">
+        <br><br>
+        <h1 class="display-4">Hello, BlockChain !</h1>
+        <p class="lead"> 523355 Introduction to Blockchain Technology Assignment 1 <br>
+            ให้ออกแบบและสร้าง Prototype ที่เหมาะสมในการน า Blockchain มาใช้แทนการเก็บข้อมูลแบบ Centralized
+            Database .</p>
+        <br>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFrom">
+            <i class="fas fa-link"></i>Add Bloack
+        </button>
+        <br>
+        <br>
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">index</th>
+                    <th scope="col">hash</th>
+                    <th scope="col">timestamp</th>
+                    <th scope="col">data</th>
+                    <th scope="col">previous_hash</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for block in blocks %}
+                <tr>
+                    <th scope="row">{{ block.index }}</th>
+                    <td>{{ block.hash }}</td>
+                    <td>{{ block.timestamp }}</td>
+                    {% if block.data=='Genesis block' %}
+                    <td>{{ block.data }}</td>
+                    {% else %}
+                    <td>
+                        {% for dataId in block.data %}
+                        <span>
+                            {{ dataId.from_address }} &nbsp; to
+                        </span>
+                        <span>
+                            {{ dataId.to_address }} &nbsp;
+                        </span>
+                        <span>
+                            {{ dataId.amount }} &nbsp; bath.
+                        </span>
+                        <br>
+                        {% endfor %}
+                    </td>
+                    {% endif %}
+
+                    <td>{{ block.previous_hash }}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Modal Add BlockChain-->
+    <div class="modal fade" id="addFrom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form class="px-4 py-3" action="http://127.0.0.1:8080/newBlock/" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;">
+                            <i class="fas fa-dice-d6"></i> &nbsp;Add BlockChain
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="form-group">
+                            <label for="exampleDropdownFormEmail1">from_address</label>
+                            <input type="text" class="form-control" id="from_address" name="from_address"
+                                placeholder="from_address">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleDropdownFormPassword1">to_address</label>
+                            <input type="text" class="form-control" id="to_address" name="to_address"
+                                placeholder="to_address">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleDropdownFormPassword1">amount</label>
+                            <input type="text" class="form-control" id="amount" name="amount" placeholder="amount">
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add Block</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Group Detail -->
+    <div class="modal fade" id="groupMembers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;">
+                        <i class="fas fa-user-friends"></i> &nbsp;Group members
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3">
+
+                                <img src="{{ url_for('static', filename='GroupMembers/Ta Natthawat.jpg') }}" width="200"
+                                    height="200" style="vertical-align: middle;border-radius: 50%;">
+                                <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/na10tthawat"><i
+                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;Ta Natthawat</a></h5>
+
+                            </div>
+                            <div class="col-md-3">
+
+                                <img src="{{ url_for('static', filename='GroupMembers/โต้ ตัดรอบ.jpg') }}" width="200"
+                                    height="200" style="vertical-align: middle;border-radius: 50%;">
+                                <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/warachit"><i
+                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;โต้ ตัดรอบ</a></h5>
+                            </div>
+                            <div class="col-md-3">
+
+                                <img src="{{ url_for('static', filename='GroupMembers/Tanatat Try.jpg') }}" width="200"
+                                    height="200" style="vertical-align: middle;border-radius: 50%;">
+                                <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/tanatat.try.7"><i
+                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;Tanatat Try</a></h5>
+
+                            </div>
+                            <div class="col-md-3">
+
+                                <img src="{{ url_for('static', filename='GroupMembers/Patcharaphon Ticharoen.jpg') }}"
+                                    width="200" height="200" style="vertical-align: middle;border-radius: 50%;">
+                                <h5 style="margin-top: 10px;"><a
+                                        href="https://www.facebook.com/profile.php?id=100002538261786"><i
+                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;Patcharaphon Ticharoen</a>
+                                </h5>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Footer -->
+    <div class="navbar fixed-bottom" style="background-color: #1C2331;color: white;">
+        <footer>
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a href="https://github.com/newler55"> newler55.com</a>
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+    </div>
+    <!-- Footer -->
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ url_for('static', filename='Bootstrap4/jquery-3.4.1.slim.min.js') }}"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='Bootstrap4/popper.min.js') }}"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='Bootstrap4/bootstrap.min.js') }}"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
