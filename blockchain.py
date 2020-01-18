@@ -85,7 +85,7 @@ app=Flask(__name__)
 def new_Block():
     blockchain.create_dataList(request.form['from_address'],request.form['to_address'],request.form['amount'])
     blockchain.generate_next_block()
-    return redirect("http://127.0.0.1:8080/blocks")
+    return redirect("http://localhost:8080/blocks")
 
 @app.route("/blocks")
 def viewBlocks():
