@@ -25,6 +25,7 @@
                 document.getElementById("editName").value = "Genesis block";
                 document.getElementById("editOwnerAddress").value = "Genesis block";
                 document.getElementById("editVerify").value = "Genesis block";
+                document.getElementById("editBootton").disabled = true;
             } else {
 
 
@@ -39,6 +40,7 @@
                 var dataIdVerify = document.getElementById("dataIdVerify" + rowId).innerText;
                 var blockPrevious_hash = document.getElementById("blockPrevious_hash" + rowId).innerText;
 
+                document.getElementById("editBootton").disabled = false;
                 document.getElementById("editIndex").value = rowId;
                 document.getElementById("editNumber").value = dataIdTitleDeedNumber;
                 document.getElementById("editBook").value = dataIdTitleDeedBook;
@@ -86,10 +88,8 @@
 
     <div style="margin-left: 40px;margin-right: 40px; margin-top: 80px; margin-bottom: 100px;">
         <br><br>
-        <h1 class="display-4">Hello, BlockChain !</h1>
-        <p class="lead"> 523355 Introduction to Blockchain Technology Assignment 1 <br>
-            ให้ออกแบบและสร้าง Prototype ที่เหมาะสมในการนำ Blockchain มาใช้แทนการเก็บข้อมูลแบบ Centralized
-            Database .</p>
+        <h1 class="display-4">System Land deed BlockChain</h1>
+        
         <br>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFrom">
             <i class="fas fa-link"></i>Add Block
@@ -118,7 +118,7 @@
                         <th scope="col">index</th>
                         <th scope="col">hash</th>
                         <th scope="col">timestamp</th>
-                        <th scope="col">TitleDeed</th>
+                        <th scope="col">Land deed</th>
                         <th scope="col">Owner</th>
                         <th scope="col">verify</th>
                         <th scope="col">previous_hash</th>
@@ -206,7 +206,7 @@
                     <div class="modal-body">
 
                         <h5 class="modal-title" style="font-size: 15px;">
-                            <i class="fas fa-scroll"></i> &nbsp;โฉนดที่โดน
+                            <i class="fas fa-scroll"></i> &nbsp;โฉนดที่ดิน
                         </h5>
                         <div style="padding: 20px;">
                            
@@ -273,7 +273,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Edit Block</button>
+                        <button id="editBootton" type="submit" class="btn btn-primary">Edit Block</button>
                     </div>
                 </form>
             </div>
@@ -297,7 +297,7 @@
                     <div class="modal-body">
 
                         <h5 class="modal-title" style="font-size: 15px;">
-                            <i class="fas fa-scroll"></i> &nbsp;โฉนดที่โดน
+                            <i class="fas fa-scroll"></i> &nbsp;โฉนดที่ดิน
                         </h5>
                         <div style="padding: 20px;">
 
