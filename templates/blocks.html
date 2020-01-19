@@ -7,13 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- font-awesome CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome5/all.css') }}">
-    <script defer src="{{ url_for('static', filename='fontawesome5/all.js') }}"></script>
+    <script src="{{ url_for('static', filename='fontawesome5/all.js') }}"></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='Bootstrap4/bootstrap.min.css') }}"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Bootstrap4/bootstrap.min.css') }}">
 
     <title>Assignment 1 </title>
+    <script type="text/javascript">
+        function getAr() {
+            alert("123");
+        }
+    </script>
 </head>
 
 <body style="font-family:cursive">
@@ -40,7 +43,7 @@
         <button data-toggle="modal" data-target="#groupMembers"
             class="btn btn-outline-success my-2 my-sm-0 order-md-last text-right" type="button"
             style="margin: 20px; font-size: 20px;">
-            Group Detail
+            Group Members
         </button>
 
 
@@ -59,6 +62,25 @@
         <br>
         <br>
 
+        <div class="row" style="margin: 20px; margin-bottom: 30px;">
+            <div style="background-color: #007BFF; width: 50px;height: 50px;border-radius: 50%; margin-right: 5px;">
+
+            </div>
+            <span style="font-weight: bold; font-size: large; margin-top: 10px;margin-right: 10px;">คลิ๊กเมาส์ที่ปุ่ม
+                Add Block เพื่อเพื่ม Block</span>
+            <div style="background-color: #58D68D; width: 50px;height: 50px;border-radius: 50%; margin-right: 5px;">
+
+            </div>
+            <span
+                style="font-weight: bold; font-size: large; margin-top: 10px;margin-right: 10px;">ได้รับการตรวจสอบเเล้ว</span>
+            <div style="background-color: #EC7063; width: 50px;height: 50px;border-radius: 50%;margin-right: 5px;">
+
+            </div>
+            <span
+                style="font-weight: bold; font-size: large;margin-top: 10px;margin-right: 10px;">มีการเเก้ไขข้อมูล</span>
+
+
+        </div>
 
         <div class="row" style="width: max-content;">
             {% for block in blocks %}
@@ -72,314 +94,324 @@
             {% endif %}
 
             <div class="card " style="width: 40rem;">
-                {% if isChainValid==block.index %}
+
+                {% if isChainValid[0]==block.index or isChainValid[1]==block.index or isChainValid[2]==block.index or isChainValid[3]==block.index or isChainValid[4]==block.index or isChainValid[5]==block.index or isChainValid[6]==block.index or isChainValid[7]==block.index or isChainValid[8]==block.index or isChainValid[9]==block.index or isChainValid[10]==block.index or isChainValid[11]==block.index or isChainValid[12]==block.index or isChainValid[13]==block.index or isChainValid[14]==block.index or isChainValid[15]==block.index or isChainValid[16]==block.index %}
+
                 <div class="card-header" style="background-color: #EC7063;">
                     <h5><b>#Block {{ block.index }}</b></h5>
+
                 </div>
                 <div class="card-body" style="background-color: #F1948A;">
-                {% else %}
-                
-                <div class="card-header" style="background-color: #58D68D;">
-                <h5><b>#Block {{ block.index }}</b></h5>
-                </div>
-                <div class="card-body" style="background-color: #ABEBC6;">
-                {% endif %}
-                
-                
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" style="width: 90px;">#hash </span>
-                        </div>
-                        <input type="text" class="form-control" value="{{ block.hash }}"
-                            aria-describedby="basic-addon3">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" style="width: 90px;">#time </span>
-                        </div>
-                        <input type="text" class="form-control" value="{{ block.timestamp }}"
-                            aria-describedby="basic-addon3">
-                    </div>
-
-                    {% if block.data=='Genesis block' %}
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" style="width: 90px;">#data </span>
-                        </div>
-
-                        <input type="text" class="form-control" value="{{ block.data }}"
-                            aria-describedby="basic-addon3">
-                    </div>
                     {% else %}
-                    {% for dataId in block.data %}
 
-
-                    <label style="font-size: 18px;">TitleDeed</label>
-                    <div style="padding: 20px;">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" style="width: 90px;">#number </span>
-                            </div>
-
-                            <input type="text" class="form-control" value="{{ dataId.TitleDeed.number }}"
-                                aria-describedby="basic-addon3">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" style="width: 90px;">#book </span>
-                            </div>
-
-                            <input type="text" class="form-control" value="{{ dataId.TitleDeed.book }}"
-                                aria-describedby="basic-addon3">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" style="width: 90px;">#address </span>
-                            </div>
-
-                            <input type="text" class="form-control" value="{{ dataId.TitleDeed.address }}"
-                                aria-describedby="basic-addon3">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" style="width: 90px;">#area </span>
-                            </div>
-
-                            <input type="text" class="form-control" value="{{ dataId.TitleDeed.area }}"
-                                aria-describedby="basic-addon3">
-                        </div>
+                    <div class="card-header" style="background-color: #58D68D;">
+                        <h5><b>#Block {{ block.index }}</b></h5>
                     </div>
+                    <div class="card-body" style="background-color: #ABEBC6;">
+                        {% endif %}
 
 
-                    <label style="font-size: 18px;">Owner</label>
-                    <div style="padding: 20px;">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" style="width: 90px;">#name </span>
+                                <span class="input-group-text" style="width: 90px;">#hash </span>
                             </div>
-
-                            <input type="text" class="form-control" value="{{ dataId.Owner.name }}"
+                            <input type="text" class="form-control" value="{{ block.hash }}"
                                 aria-describedby="basic-addon3">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" style="width: 90px;">#address </span>
+                                <span class="input-group-text" style="width: 90px;">#time </span>
                             </div>
-
-                            <input type="text" class="form-control" value="{{ dataId.Owner.address }}"
+                            <input type="text" class="form-control" value="{{ block.timestamp }}"
                                 aria-describedby="basic-addon3">
                         </div>
 
-                    </div>
-
-                    <label style="font-size: 18px;">verify</label>
-                    <div style="padding: 20px;">
+                        {% if block.data=='Genesis block' %}
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" style="width: 90px;">#verify </span>
+                                <span class="input-group-text" style="width: 90px;">#data </span>
                             </div>
 
-                            <input type="text" class="form-control" value="{{ dataId.verify }}"
+                            <input type="text" class="form-control" value="{{ block.data }}"
                                 aria-describedby="basic-addon3">
                         </div>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
+                        {% else %}
+                        {% for dataId in block.data %}
 
 
+                        <label style="font-size: 18px;">TitleDeed</label>
+                        <div style="padding: 20px;">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 90px;">#number </span>
+                                </div>
 
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" style="width: 90px;">#pv_hash </span>
+                                <input type="text" class="form-control" value="{{ dataId.TitleDeed.number }}"
+                                    aria-describedby="basic-addon3">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 90px;">#book </span>
+                                </div>
+
+                                <input type="text" class="form-control" value="{{ dataId.TitleDeed.book }}"
+                                    aria-describedby="basic-addon3">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 90px;">#address </span>
+                                </div>
+
+                                <input type="text" class="form-control" value="{{ dataId.TitleDeed.address }}"
+                                    aria-describedby="basic-addon3">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 90px;">#area </span>
+                                </div>
+
+                                <input type="text" class="form-control" value="{{ dataId.TitleDeed.area }}"
+                                    aria-describedby="basic-addon3">
+                            </div>
                         </div>
-                        <input type="text" class="form-control" value="{{ block.previous_hash }}"
-                            aria-describedby="basic-addon3">
+
+
+                        <label style="font-size: 18px;">Owner</label>
+                        <div style="padding: 20px;">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 90px;">#name </span>
+                                </div>
+
+                                <input type="text" class="form-control" value="{{ dataId.Owner.name }}"
+                                    aria-describedby="basic-addon3">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 90px;">#address </span>
+                                </div>
+
+                                <input type="text" class="form-control" value="{{ dataId.Owner.address }}"
+                                    aria-describedby="basic-addon3">
+                            </div>
+
+                        </div>
+
+                        <label style="font-size: 18px;">verify</label>
+                        <div style="padding: 20px;">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 90px;">#verify </span>
+                                </div>
+
+                                <input type="text" class="form-control" value="{{ dataId.verify }}"
+                                    aria-describedby="basic-addon3">
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="width: 90px;">#pv_hash </span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ block.previous_hash }}"
+                                aria-describedby="basic-addon3">
+                        </div>
+
                     </div>
 
                 </div>
+                {% endfor %}
+                <div style="margin-right: 40px;">
 
-            </div>
-            {% endfor %}
-            <div style="margin-right: 40px;">
-
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <!-- Modal Add BlockChain-->
-    <div class="modal fade" id="addFrom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <form class="px-4 py-3" action="http://localhost:8080/newBlock/" method="POST">
+        <!-- Modal Add BlockChain-->
+        <div class="modal fade" id="addFrom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form class="px-4 py-3" action="http://localhost:8080/newBlock/" method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;">
+                                <i class="fas fa-dice-d6"></i> &nbsp;Add BlockChain
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <h5 class="modal-title" style="font-size: 15px;">
+                                <i class="fas fa-scroll"></i> &nbsp;โฉนดที่โดน
+                            </h5>
+                            <div style="padding: 20px;">
+
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormEmail1">เลขที่</label>
+                                    <input type="text" class="form-control" name="number" placeholder="กรอกเลขที่">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormPassword1">เล่ม</label>
+                                    <input type="text" class="form-control" name="book" placeholder="กรอกเล่ม">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormPassword1">ที่อยู่</label>
+                                    <input type="text" class="form-control" name="DeedAddress"
+                                        placeholder="กรอกที่อยู่">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormPassword1">พื้นที่โดยประมาณ</label>
+                                    <input type="text" class="form-control" name="area"
+                                        placeholder="กรอกพื้นที่โดยประมาณ">
+                                </div>
+
+                            </div>
+
+                            <h5 class="modal-title" style="font-size: 15px;">
+                                <i class="fas fa-user-alt"></i> &nbsp;ให้เเก่
+                            </h5>
+                            <div style="padding: 20px;">
+
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormEmail1">ชื่อ</label>
+                                    <input type="text" class="form-control" name="name" placeholder="กรอกชื่อ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormPassword1">ที่อยู่</label>
+                                    <input type="text" class="form-control" name="OwnerAddress"
+                                        placeholder="กรอกที่อยู่">
+                                </div>
+
+
+                            </div>
+
+                            <h5 class="modal-title" style="font-size: 15px;">
+                                <i class="fas fa-user-shield"></i> &nbsp;ผู้ตรวจสอบ
+                            </h5>
+                            <div style="padding: 20px;">
+
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormEmail1">ชื่อ</label>
+                                    <input type="text" class="form-control" name="verify" placeholder="กรอกชื่อ">
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add Block</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Group Detail -->
+        <div class="modal fade" id="groupMembers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;">
-                            <i class="fas fa-dice-d6"></i> &nbsp;Add BlockChain
+                            <i class="fas fa-user-friends"></i> &nbsp;Group members 10
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row text-center" style="color:#007BFF;">
+                                <div class="col-md-3 ">
 
-                        <h5 class="modal-title" style="font-size: 15px;">
-                            <i class="fas fa-scroll"></i> &nbsp;โฉนดที่โดน
-                        </h5>
-                        <div style="padding: 20px;">
+                                    <img src="{{ url_for('static', filename='GroupMembers/Ta Natthawat.jpg') }}"
+                                        width="200" height="200" style="vertical-align: middle;border-radius: 50%;">
+                                    <h5 style="margin-top: 10px; ">B6015695</h5>
+                                    <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/na10tthawat"><i
+                                                class="fab fa-facebook" color="#2196F3"></i>&nbsp;นายณัฐวัตร
+                                            นารินทร์</a></h5>
 
-                            <div class="form-group">
-                                <label for="exampleDropdownFormEmail1">เลขที่</label>
-                                <input type="text" class="form-control" name="number" placeholder="กรอกเลขที่">
+                                </div>
+                                <div class="col-md-3">
+
+                                    <img src="{{ url_for('static', filename='GroupMembers/โต้ ตัดรอบ.jpg') }}"
+                                        width="200" height="200" style="vertical-align: middle;border-radius: 50%;">
+                                    <h5 style="margin-top: 10px;">B6026042</h5>
+                                    <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/warachit"><i
+                                                class="fab fa-facebook" color="#2196F3"></i>&nbsp;นายวราชิต อินคุณ</a>
+                                    </h5>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <img src="{{ url_for('static', filename='GroupMembers/Tanatat Try.jpg') }}"
+                                        width="200" height="200" style="vertical-align: middle;border-radius: 50%;">
+                                    <h5 style="margin-top: 10px;">B6021726</h5>
+                                    <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/tanatat.try.7"><i
+                                                class="fab fa-facebook" color="#2196F3"></i>&nbsp;นายธนทัต
+                                            สร้อยสนธิ์</a></h5>
+
+                                </div>
+                                <div class="col-md-3">
+
+                                    <img src="{{ url_for('static', filename='GroupMembers/Patcharaphon Ticharoen.jpg') }}"
+                                        width="200" height="200" style="vertical-align: middle;border-radius: 50%;">
+                                    <h5 style="margin-top: 10px;">B6004897</h5>
+                                    <h5 style="margin-top: 10px;"><a
+                                            href="https://www.facebook.com/profile.php?id=100002538261786"><i
+                                                class="fab fa-facebook" color="#2196F3"></i>&nbsp;นายพัชรพล
+                                            เตียเจริญ</a>
+                                    </h5>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleDropdownFormPassword1">เล่ม</label>
-                                <input type="text" class="form-control" name="book" placeholder="กรอกเล่ม">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleDropdownFormPassword1">ที่อยู่</label>
-                                <input type="text" class="form-control" name="DeedAddress" placeholder="กรอกที่อยู่">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleDropdownFormPassword1">พื้นที่โดยประมาณ</label>
-                                <input type="text" class="form-control" name="area" placeholder="กรอกพื้นที่โดยประมาณ">
-                            </div>
-
-                        </div>
-
-                        <h5 class="modal-title" style="font-size: 15px;">
-                            <i class="fas fa-user-alt"></i> &nbsp;ให้เเก่
-                        </h5>
-                        <div style="padding: 20px;">
-
-                            <div class="form-group">
-                                <label for="exampleDropdownFormEmail1">ชื่อ</label>
-                                <input type="text" class="form-control" name="name" placeholder="กรอกชื่อ">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleDropdownFormPassword1">ที่อยู่</label>
-                                <input type="text" class="form-control" name="OwnerAddress" placeholder="กรอกที่อยู่">
-                            </div>
-
-
-                        </div>
-
-                        <h5 class="modal-title" style="font-size: 15px;">
-                            <i class="fas fa-user-shield"></i> &nbsp;ผู้ตรวจสอบ
-                        </h5>
-                        <div style="padding: 20px;">
-
-                            <div class="form-group">
-                                <label for="exampleDropdownFormEmail1">ชื่อ</label>
-                                <input type="text" class="form-control" name="verify" placeholder="กรอกชื่อ">
-                            </div>
-
 
                         </div>
 
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add Block</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Group Detail -->
-    <div class="modal fade" id="groupMembers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;">
-                        <i class="fas fa-user-friends"></i> &nbsp;Group members
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-3">
-
-                                <img src="{{ url_for('static', filename='GroupMembers/Ta Natthawat.jpg') }}" width="200"
-                                    height="200" style="vertical-align: middle;border-radius: 50%;">
-                                <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/na10tthawat"><i
-                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;Ta Natthawat</a></h5>
-
-                            </div>
-                            <div class="col-md-3">
-
-                                <img src="{{ url_for('static', filename='GroupMembers/โต้ ตัดรอบ.jpg') }}" width="200"
-                                    height="200" style="vertical-align: middle;border-radius: 50%;">
-                                <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/warachit"><i
-                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;โต้ ตัดรอบ</a></h5>
-                            </div>
-                            <div class="col-md-3">
-
-                                <img src="{{ url_for('static', filename='GroupMembers/Tanatat Try.jpg') }}" width="200"
-                                    height="200" style="vertical-align: middle;border-radius: 50%;">
-                                <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/tanatat.try.7"><i
-                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;Tanatat Try</a></h5>
-
-                            </div>
-                            <div class="col-md-3">
-
-                                <img src="{{ url_for('static', filename='GroupMembers/Patcharaphon Ticharoen.jpg') }}"
-                                    width="200" height="200" style="vertical-align: middle;border-radius: 50%;">
-                                <h5 style="margin-top: 10px;"><a
-                                        href="https://www.facebook.com/profile.php?id=100002538261786"><i
-                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;Patcharaphon Ticharoen</a>
-                                </h5>
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 
                     </div>
 
-
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-
-                </div>
-
             </div>
         </div>
-    </div>
 
 
 
-    <!-- Footer -->
-    <div class="navbar fixed-bottom" style="background-color: #1C2331;color: white;">
-        <footer>
+        <!-- Footer -->
+        <div class="navbar fixed-bottom" style="background-color: #1C2331;color: white;">
+            <footer>
 
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                <a href="https://github.com/newler55"> newler55.com</a>
-            </div>
-            <!-- Copyright -->
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                    <a href="https://github.com/newler55"> newler55.com</a> | 523355-G10 | CPE#22 | SUT#25
+                </div>
+                <!-- Copyright -->
 
-        </footer>
-    </div>
-    <!-- Footer -->
+            </footer>
+        </div>
+        <!-- Footer -->
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="{{ url_for('static', filename='Bootstrap4/jquery-3.4.1.slim.min.js') }}"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='Bootstrap4/popper.min.js') }}"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='Bootstrap4/bootstrap.min.js') }}"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="{{ url_for('static', filename='Bootstrap4/jquery-3.4.1.slim.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='Bootstrap4/popper.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='Bootstrap4/bootstrap.min.js') }}"></script>
 
 </body>
 

@@ -5,15 +5,52 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
 
     <!-- font-awesome CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome5/all.css') }}">
-    <script defer src="{{ url_for('static', filename='fontawesome5/all.js') }}"></script>
+    <script  src="{{ url_for('static', filename='fontawesome5/all.js') }}"></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='Bootstrap4/bootstrap.min.css') }}"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Bootstrap4/bootstrap.min.css') }}">
 
     <title>Assignment 1 </title>
+    <script type="text/javascript">
+        function getId(element) {
+            // alert("row" + (element.closest('tr').rowIndex - 1) );
+            var rowId = (element.closest('tr').rowIndex - 1);
+            if (rowId == 0) {
+                document.getElementById("editNumber").value = "Genesis block";
+                document.getElementById("editBook").value = "Genesis block";
+                document.getElementById("editDeedAddress").value = "Genesis block";
+                document.getElementById("editArea").value = "Genesis block";
+                document.getElementById("editName").value = "Genesis block";
+                document.getElementById("editOwnerAddress").value = "Genesis block";
+                document.getElementById("editVerify").value = "Genesis block";
+            } else {
+
+
+                var blockHash = document.getElementById("blockHash" + rowId).innerText;
+                var blockTimestamp = document.getElementById("blockTimestamp" + rowId).innerText;
+                var dataIdTitleDeedNumber = document.getElementById("dataIdTitleDeedNumber" + rowId).innerText;
+                var dataIdTitleDeedBook = document.getElementById("dataIdTitleDeedBook" + rowId).innerText;
+                var dataIdTitleDeedAddress = document.getElementById("dataIdTitleDeedAddress" + rowId).innerText;
+                var dataIdTitleDeedArea = document.getElementById("dataIdTitleDeedArea" + rowId).innerText;
+                var dataIdOwnerName = document.getElementById("dataIdOwnerName" + rowId).innerText;
+                var dataIdOwnerAddress = document.getElementById("dataIdOwnerAddress" + rowId).innerText;
+                var dataIdVerify = document.getElementById("dataIdVerify" + rowId).innerText;
+                var blockPrevious_hash = document.getElementById("blockPrevious_hash" + rowId).innerText;
+
+                document.getElementById("editIndex").value = rowId;
+                document.getElementById("editNumber").value = dataIdTitleDeedNumber;
+                document.getElementById("editBook").value = dataIdTitleDeedBook;
+                document.getElementById("editDeedAddress").value = dataIdTitleDeedArea;
+                document.getElementById("editArea").value = dataIdTitleDeedArea;
+                document.getElementById("editName").value = dataIdOwnerName;
+                document.getElementById("editOwnerAddress").value = dataIdOwnerAddress;
+                document.getElementById("editVerify").value = dataIdVerify;
+            }
+
+        }
+    </script>
 </head>
 
 <body style="font-family:cursive">
@@ -41,7 +78,7 @@
         <button data-toggle="modal" data-target="#groupMembers"
             class="btn btn-outline-success my-2 my-sm-0 order-md-last text-right" type="button"
             style="margin: 20px; font-size: 20px;">
-            Group Detail
+            Group Members
         </button>
 
 
@@ -60,10 +97,23 @@
         <br>
         <br>
 
+        <div class="row" style="margin: 20px; margin-bottom: 30px;">
+            <div style="background-color: #007BFF; width: 50px;height: 50px;border-radius: 50%; margin-right: 5px;">
+
+            </div>
+            <span style="font-weight: bold; font-size: large; margin-top: 10px;margin-right: 10px;">คลิ๊กเมาส์ที่ปุ่ม Add Block เพื่อเพื่ม Block</span>
+            <div style="background-color: #CCD1D1; width: 50px;height: 50px;border-radius: 50%; margin-right: 5px;">
+
+            </div>
+            <span style="font-weight: bold; font-size: large; margin-top: 10px;margin-right: 10px;">คลิ๊กเมาส์ที่เเถวของตารางเพื่อจำลองการเเก้ไขข้อมูลภายใน Block เเละ ไปตรวจสอบ chain ที่หน้า <a href="http://localhost:8080/blocks">Blocks</a></span>
+
+
+        </div>
 
         <div style="padding-right: 40px; width: max-content;">
             <table class="table table-bordered table-hover">
-                <thead class="" style="background-color: #58D68D;">
+                <!-- style="background-color: #58D68D;" #566573-->
+                <thead  style="background-color: #CCD1D1;">
                     <tr>
                         <th scope="col">index</th>
                         <th scope="col">hash</th>
@@ -75,12 +125,14 @@
 
                     </tr>
                 </thead>
-                <tbody style="background-color: #ABEBC6;">
+                <!-- style="background-color: ##F8F9F9;" -->
+                <tbody style="background-color: #F8F9F9;">
+
                     {% for block in blocks %}
-                    <tr>
-                        <th scope="row">{{ block.index }}</th>
-                        <td>{{ block.hash }}</td>
-                        <td>{{ block.timestamp }}</td>
+                    <tr id="TrId" onclick="getId(this)" data-toggle="modal" data-target="#rowTable" style="cursor: pointer;">
+                        <th scope="row"><span id="blockIndex{{ block.index }}">{{ block.index }}</span></th>
+                        <td><span id="blockHash{{ block.index }}">{{ block.hash }}</span></td>
+                        <td><span id="blockTimestamp{{ block.index }}">{{ block.timestamp }}</span></td>
                         {% if block.data=='Genesis block' %}
                         <td colspan="3" class="text-center">{{ block.data }}</td>
                         {% else %}
@@ -88,39 +140,47 @@
                         {% for dataId in block.data %}
                         <td>
                             <span>
-                                เลขที่:&nbsp; {{ dataId.TitleDeed.number }} &nbsp;
+                                เลขที่:&nbsp; <span <span
+                                    id="dataIdTitleDeedNumber{{ block.index }}">{{ dataId.TitleDeed.number }}</span>
+                                &nbsp;
                             </span>
                             <span>
-                                เล่ม:&nbsp; {{ dataId.TitleDeed.book }} &nbsp;
+                                เล่ม:&nbsp; <span
+                                    id="dataIdTitleDeedBook{{ block.index }}">{{ dataId.TitleDeed.book }}</span> &nbsp;
                             </span>
                             <span>
-                                ที่อยู่:&nbsp; {{ dataId.TitleDeed.address }} &nbsp;
+                                ที่อยู่:&nbsp; <span
+                                    id="dataIdTitleDeedAddress{{ block.index }}">{{ dataId.TitleDeed.address }}</span>
+                                &nbsp;
                             </span>
                             <span>
-                                เนื้อที่ประมาณ:&nbsp; {{ dataId.TitleDeed.area }} 
+                                เนื้อที่ประมาณ:&nbsp; <span
+                                    id="dataIdTitleDeedArea{{ block.index }}">{{ dataId.TitleDeed.area }}</span>
                             </span>
-                            
+
                         </td>
                         <td>
                             <span>
-                                ชื่อ:&nbsp;{{ dataId.Owner.name }} &nbsp;
+                                ชื่อ:&nbsp;<span id="dataIdOwnerName{{ block.index }}">{{ dataId.Owner.name }}</span>
+                                &nbsp;
                             </span>
                             <span>
-                                ที่อยู่:&nbsp; {{ dataId.Owner.address }} &nbsp;
+                                ที่อยู่:&nbsp; <span
+                                    id="dataIdOwnerAddress{{ block.index }}">{{ dataId.Owner.address }}</span> &nbsp;
                             </span>
-                           
+
                         </td>
                         <td>
                             <span>
-                                ชื่อ:&nbsp;{{ dataId.verify }} 
+                                ชื่อ:&nbsp; <span id="dataIdVerify{{ block.index }}">{{ dataId.verify }}</span>
                             </span>
-                            
+
                         </td>
                         {% endfor %}
 
                         {% endif %}
 
-                        <td>{{ block.previous_hash }}</td>
+                        <td><span id="blockPrevious_hash{{ block.index }}">{{ block.previous_hash }}</span></td>
                     </tr>
                     {% endfor %}
 
@@ -134,10 +194,10 @@
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form class="px-4 py-3" action="http://localhost:8080/newBlock/" method="POST">
+                <form class="px-4 py-3" action="http://localhost:8080/editBlock/" method="POST">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;">
-                            <i class="fas fa-dice-d6"></i> &nbsp;Add BlockChain
+                            <i class="fas fa-dice-d6"></i> &nbsp;Edit BlockChain
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -145,13 +205,75 @@
                     </div>
                     <div class="modal-body">
 
-                        ......
-                        
+                        <h5 class="modal-title" style="font-size: 15px;">
+                            <i class="fas fa-scroll"></i> &nbsp;โฉนดที่โดน
+                        </h5>
+                        <div style="padding: 20px;">
+                           
+                               
+                                <input id="editIndex" type="hidden" class="form-control" name="editIndex">
+                            
+                            <div class="form-group">
+                                <label for="exampleDropdownFormEmail1">เลขที่</label>
+                                <input id="editNumber" type="text" class="form-control" name="editNumber"
+                                    placeholder="กรอกเลขที่">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">เล่ม</label>
+                                <input id="editBook" type="text" class="form-control" name="editBook"
+                                    placeholder="กรอกเล่ม">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">ที่อยู่</label>
+                                <input id="editDeedAddress" type="text" class="form-control" name="editDeedAddress"
+                                    placeholder="กรอกที่อยู่">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">พื้นที่โดยประมาณ</label>
+                                <input id="editArea" type="text" class="form-control" name="editArea"
+                                    placeholder="กรอกพื้นที่โดยประมาณ">
+                            </div>
+
+                        </div>
+
+                        <h5 class="modal-title" style="font-size: 15px;">
+                            <i class="fas fa-user-alt"></i> &nbsp;ให้เเก่
+                        </h5>
+                        <div style="padding: 20px;">
+
+                            <div class="form-group">
+                                <label for="exampleDropdownFormEmail1">ชื่อ</label>
+                                <input id="editName" type="text" class="form-control" name="editName"
+                                    placeholder="กรอกชื่อ">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">ที่อยู่</label>
+                                <input id="editOwnerAddress" type="text" class="form-control" name="editOwnerAddress"
+                                    placeholder="กรอกที่อยู่">
+                            </div>
+
+
+                        </div>
+
+                        <h5 class="modal-title" style="font-size: 15px;">
+                            <i class="fas fa-user-shield"></i> &nbsp;ผู้ตรวจสอบ
+                        </h5>
+                        <div style="padding: 20px;">
+
+                            <div class="form-group">
+                                <label for="exampleDropdownFormEmail1">ชื่อ</label>
+                                <input id="editVerify" type="text" class="form-control" name="editVerify"
+                                    placeholder="กรอกชื่อ">
+                            </div>
+
+
+                        </div>
+
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add Block</button>
+                        <button type="submit" class="btn btn-primary">Edit Block</button>
                     </div>
                 </form>
             </div>
@@ -174,65 +296,60 @@
                     </div>
                     <div class="modal-body">
 
-                        <h5 class="modal-title"  style="font-size: 15px;">
+                        <h5 class="modal-title" style="font-size: 15px;">
                             <i class="fas fa-scroll"></i> &nbsp;โฉนดที่โดน
                         </h5>
                         <div style="padding: 20px;">
-                            
+
                             <div class="form-group">
                                 <label for="exampleDropdownFormEmail1">เลขที่</label>
-                                <input type="text" class="form-control"  name="number"
-                                    placeholder="กรอกเลขที่">
+                                <input type="text" class="form-control" name="number" placeholder="กรอกเลขที่">
                             </div>
                             <div class="form-group">
                                 <label for="exampleDropdownFormPassword1">เล่ม</label>
-                                <input type="text" class="form-control"  name="book"
-                                    placeholder="กรอกเล่ม">
+                                <input type="text" class="form-control" name="book" placeholder="กรอกเล่ม">
                             </div>
                             <div class="form-group">
                                 <label for="exampleDropdownFormPassword1">ที่อยู่</label>
-                                <input type="text" class="form-control"  name="DeedAddress" placeholder="กรอกที่อยู่">
+                                <input type="text" class="form-control" name="DeedAddress" placeholder="กรอกที่อยู่">
                             </div>
                             <div class="form-group">
                                 <label for="exampleDropdownFormPassword1">พื้นที่โดยประมาณ</label>
-                                <input type="text" class="form-control"  name="area" placeholder="กรอกพื้นที่โดยประมาณ">
+                                <input type="text" class="form-control" name="area" placeholder="กรอกพื้นที่โดยประมาณ">
                             </div>
 
                         </div>
 
-                        <h5 class="modal-title"  style="font-size: 15px;">
+                        <h5 class="modal-title" style="font-size: 15px;">
                             <i class="fas fa-user-alt"></i> &nbsp;ให้เเก่
                         </h5>
                         <div style="padding: 20px;">
-                            
+
                             <div class="form-group">
                                 <label for="exampleDropdownFormEmail1">ชื่อ</label>
-                                <input type="text" class="form-control" name="name"
-                                    placeholder="กรอกชื่อ">
+                                <input type="text" class="form-control" name="name" placeholder="กรอกชื่อ">
                             </div>
                             <div class="form-group">
                                 <label for="exampleDropdownFormPassword1">ที่อยู่</label>
-                                <input type="text" class="form-control"  name="OwnerAddress"
-                                    placeholder="กรอกที่อยู่">
+                                <input type="text" class="form-control" name="OwnerAddress" placeholder="กรอกที่อยู่">
                             </div>
-                            
+
 
                         </div>
 
-                        <h5 class="modal-title"  style="font-size: 15px;">
+                        <h5 class="modal-title" style="font-size: 15px;">
                             <i class="fas fa-user-shield"></i> &nbsp;ผู้ตรวจสอบ
                         </h5>
                         <div style="padding: 20px;">
-                            
+
                             <div class="form-group">
                                 <label for="exampleDropdownFormEmail1">ชื่อ</label>
-                                <input type="text" class="form-control"  name="verify"
-                                    placeholder="กรอกชื่อ">
+                                <input type="text" class="form-control" name="verify" placeholder="กรอกชื่อ">
                             </div>
-                            
+
 
                         </div>
-                        
+
 
                     </div>
                     <div class="modal-footer">
@@ -253,7 +370,7 @@
 
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;">
-                        <i class="fas fa-user-friends"></i> &nbsp;Group members
+                        <i class="fas fa-user-friends"></i> &nbsp;Group members 10
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -261,37 +378,41 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-3">
+                        <div class="row text-center" style="color:#007BFF;">
+                            <div class="col-md-3 ">
 
                                 <img src="{{ url_for('static', filename='GroupMembers/Ta Natthawat.jpg') }}" width="200"
                                     height="200" style="vertical-align: middle;border-radius: 50%;">
+                                <h5 style="margin-top: 10px; ">B6015695</h5>    
                                 <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/na10tthawat"><i
-                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;Ta Natthawat</a></h5>
+                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;นายณัฐวัตร นารินทร์</a></h5>
 
                             </div>
                             <div class="col-md-3">
 
                                 <img src="{{ url_for('static', filename='GroupMembers/โต้ ตัดรอบ.jpg') }}" width="200"
                                     height="200" style="vertical-align: middle;border-radius: 50%;">
+                                    <h5 style="margin-top: 10px;">B6026042</h5>  
                                 <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/warachit"><i
-                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;โต้ ตัดรอบ</a></h5>
+                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;นายวราชิต อินคุณ</a></h5>
                             </div>
                             <div class="col-md-3">
 
                                 <img src="{{ url_for('static', filename='GroupMembers/Tanatat Try.jpg') }}" width="200"
                                     height="200" style="vertical-align: middle;border-radius: 50%;">
+                                <h5 style="margin-top: 10px;">B6021726</h5>  
                                 <h5 style="margin-top: 10px;"><a href="https://www.facebook.com/tanatat.try.7"><i
-                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;Tanatat Try</a></h5>
+                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;นายธนทัต สร้อยสนธิ์</a></h5>
 
                             </div>
                             <div class="col-md-3">
 
                                 <img src="{{ url_for('static', filename='GroupMembers/Patcharaphon Ticharoen.jpg') }}"
                                     width="200" height="200" style="vertical-align: middle;border-radius: 50%;">
+                                <h5 style="margin-top: 10px;">B6004897</h5>  
                                 <h5 style="margin-top: 10px;"><a
                                         href="https://www.facebook.com/profile.php?id=100002538261786"><i
-                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;Patcharaphon Ticharoen</a>
+                                            class="fab fa-facebook" color="#2196F3"></i>&nbsp;นายพัชรพล เตียเจริญ</a>
                                 </h5>
                             </div>
                         </div>
@@ -317,7 +438,7 @@
 
             <!-- Copyright -->
             <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                <a href="https://github.com/newler55"> newler55.com</a>
+                <a href="https://github.com/newler55"> newler55.com</a> | 523355-G10 | CPE#22 | SUT#25
             </div>
             <!-- Copyright -->
 
@@ -328,16 +449,11 @@
 
 
     <!-- Optional JavaScript -->
+    
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="{{ url_for('static', filename='Bootstrap4/jquery-3.4.1.slim.min.js') }}"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='Bootstrap4/popper.min.js') }}"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='Bootstrap4/bootstrap.min.js') }}"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='Bootstrap4/jquery-3.4.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='Bootstrap4/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='Bootstrap4/bootstrap.min.js') }}"></script>
 
 </body>
 
