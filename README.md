@@ -2,7 +2,7 @@
 
  #### setup project
 
-  - `https://github.com/newler55/blockchain-webapp-by-python-flask.git`
+  - `git clone https://github.com/newler55/blockchain-webapp-by-python-flask.git`
   - `pip install -U Flask`
   - `cd blockchain-webapp-by-python-flask`
   - `python blockchain.py`
