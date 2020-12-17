@@ -18,4 +18,28 @@
 * `https://getbootstrap.com/docs/4.0/getting-started/introduction/`
 * `https://fontawesome.com/icons?d=gallery`
 
+### UX/UI - Test
+* 1-Home.png
+  <div style="text-align:center"><img src="./UI/1-Home.png" width="100%"></img></div>
+* 2-Home.png
+  <div style="text-align:center"><img src="./UI/2-Home.png" width="100%"></img></div>
+* 3-Home.png
+  <div style="text-align:center"><img src="./UI/3-Home.png" width="100%"></img></div>
+* 4-Add-Block.png
+  <div style="text-align:center"><img src="./UI/4-Add-Block.png" width="100%"></img></div>
+* 5-Add-Block.png
+  <div style="text-align:center"><img src="./UI/5-Add-Block.png" width="100%"></img></div>
+* 6-Blocks.png
+  <div style="text-align:center"><img src="./UI/6-Blocks.png" width="100%"></img></div>
+* 7-Blocks.png
+  <div style="text-align:center"><img src="./UI/7-Blocks.png" width="100%"></img></div>
+* 8-Blocks.png
+  <div style="text-align:center"><img src="./UI/8-Blocks.png" width="100%"></img></div>
+* 9-Group.png
+  <div style="text-align:center"><img src="./UI/9-Group.png" width="100%"></img></div>
+
+
+
+
+
   
