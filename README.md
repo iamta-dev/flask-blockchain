@@ -1,14 +1,18 @@
 # flask-blockchain
+#### Minicond install
+* miniconda.html@latest [Click](https://docs.conda.io/en/latest/miniconda.html)
+* bash Miniconda3-latest-*.sh
+* conda create -n <name_env> python=3.6 pip
 
-#### setup project
+#### RUN APP
 
-* `git clone https://github.com/newler55/blockchain-webapp-by-python-flask.git`
+* `git clone https://github.com/newler55/flask-blockchain.git`
 * `pip install -U Flask`
-* `cd blockchain-webapp-by-python-flask`
+* `cd flask-blockchain`
 * `python blockchain.py`
-* `view: http://localhost:8080/`
+* `[open browser] http://localhost:8080/`
   
-#### support
+#### SUPPORT
 * `https://www.python.org/downloads/`
 * `http://flask.palletsprojects.com/en/1.1.x/`
 * `https://getbootstrap.com/docs/4.0/getting-started/introduction/`
