@@ -33,10 +33,14 @@
   <div style="text-align:center"><img src="./UI/6-Blocks.png" width="100%"></img></div>
 * 7-Blocks.png
   <div style="text-align:center"><img src="./UI/7-Blocks.png" width="100%"></img></div>
-* 8-Blocks.png
-  <div style="text-align:center"><img src="./UI/8-Blocks.png" width="100%"></img></div>
-* 9-Group.png
-  <div style="text-align:center"><img src="./UI/9-Group.png" width="100%"></img></div>
+* 8-Edit-Block.png
+  <div style="text-align:center"><img src="./UI/8-Edit-Block.png" width="100%"></img></div>
+* 9-Edit-Block.png
+  <div style="text-align:center"><img src="./UI/9-Edit-Block.png" width="100%"></img></div>
+* 10-Blocks.png
+  <div style="text-align:center"><img src="./UI/10-Blocks.png" width="100%"></img></div>
+* 11-Group.png
+  <div style="text-align:center"><img src="./UI/11-Group.png" width="100%"></img></div>
 
 
 
